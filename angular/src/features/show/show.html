@@ -1,0 +1,50 @@
+<div ng-controller="ShowController as showCtrl">
+    <h2>{{::showCtrl.post.title}}</h2>
+
+    <section class="post">
+        <h5>
+            Posted on <time class="label label-primary">{{showCtrl.post.createdAt | date:'dd MMMM yyyy'}}</time>
+            by <strong>{{::showCtrl.post.author}}</strong>
+        </h5>
+        <p ng-bind-html="showCtrl.post.content"></p>
+        <div class="tags">
+            <span>Tags:</span>
+            <span class="label label-default" ng-repeat="tag in ::showCtrl.post.tags">{{::tag}}</span>
+        </div>
+    </section>
+
+    <section class="comments">
+        <h2>Comments ({{showCtrl.post.comments.length}})</h2>
+        <div ng-repeat="comment in showCtrl.post.comments"
+             blog-comment="comment"></div>
+
+        <form>
+            <fieldset>
+                <legend>Leave a comment</legend>
+                <p>All fields are required</p>
+
+                <p class="alert alert-danger" ng-if="false">
+                    An error occurred when saving the comment
+                </p>
+
+                <div class="form-group">
+                    <label class="control-label">Your name *</label>
+                    <input type="text" class="form-control" ng-model="showCtrl.formComment.author" required />
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Your Comment *</label>
+                    <textarea class="form-control" rows="4" ng-model="showCtrl.formComment.content" required />
+                </div>
+
+                <div class="form-group">
+                    <div class="controls">
+                        <button class="btn btn-primary" type="submit" ng-click="showCtrl.send()">Send</button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+
+    </section>
+</div>

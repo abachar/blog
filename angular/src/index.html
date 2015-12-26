@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr" ng-app="blog">
+<head>
+    <meta charset="utf-8" />
+    <title>Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro">
+    <link rel="stylesheet" href="bundle.css">
+</head>
+<body>
+
+<header class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/">Blog[AngularJS]</a>
+            <!-- Posts -->
+            <!-- About -->
+        </div>
+        <nav class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+               <li><a href="#/create">Create a post</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+    <div ng-view></div>
+</div>
+
+<script src="bundle.js"></script>
+<script src="https://rawgit.com/kentcdodds/ng-stats/master/dist/ng-stats.js"></script>
+<script>
+    $(document).ready(function () {
+        showAngularStats();
+    });
+</script>
+</body>
+</html>
