@@ -4,10 +4,10 @@ var _ = require('lodash'),
     router = express.Router(),
     app = express(),
     bodyParser   = require('body-parser'),
-    posts = [];
+    posts = require('./posts.fixture.json');
 
 app.use(bodyParser.json());
-app.use(express["static"](path.join(__dirname, 'build')));
+app.use(express["static"](path.join(__dirname, '../build')));
 
 /**
  * find all

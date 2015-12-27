@@ -3,5 +3,5 @@
         Posted on <time class="label label-info">{{::createdAt}}</time>
         by <strong>{{::comment.author}}</strong>
     </h5>
-    <p>{{::comment.content}}</p>
+    <p ng-bind-html="comment.content | nl2br"></p>
 </article>

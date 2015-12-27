@@ -6,7 +6,7 @@
             Posted on <time class="label label-primary">{{showCtrl.post.createdAt | date:'dd MMMM yyyy'}}</time>
             by <strong>{{::showCtrl.post.author}}</strong>
         </h5>
-        <p ng-bind-html="showCtrl.post.content"></p>
+        <p ng-bind-html="showCtrl.post.content | nl2br"></p>
         <div class="tags">
             <span>Tags:</span>
             <span class="label label-default" ng-repeat="tag in ::showCtrl.post.tags">{{::tag}}</span>

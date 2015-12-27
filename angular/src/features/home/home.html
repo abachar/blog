@@ -14,7 +14,8 @@
                 by <strong>{{::post.author}}</strong>,
                 {{::post.comments.length}} comments
             </h5>
-            <p>{{post.content}}</p>
+
+            <p>{{post.content | limitTo:100}}...</p>
         </article>
     </section>
 </div>

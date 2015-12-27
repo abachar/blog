@@ -10,9 +10,21 @@ var karma = require('karma').Server;
  * Define paths
  */
 var sources = {
-    html: 'src/**/*.html',
-    styles: 'src/**/*.less',
-    scripts: 'src/**/*.js'
+    templates: [
+        'src/**/*.html',
+        '!src/index.html'
+    ],
+    styles: [
+        'node_modules/bootstrap/dist/css/bootstrap.css',
+        'src/**/*.less'
+    ],
+    scripts: [
+        'node_modules/jquery/dist/jquery.js',
+        'node_modules/angular/angular.js',
+        'node_modules/angular-route/angular-route.js',
+        'src/app.js',
+        'src/**/*.js'
+    ]
 };
 
 var build = 'build/';
@@ -21,63 +33,44 @@ var build = 'build/';
  * Task styles: compile and concat all less files
  */
 gulp.task('styles', function () {
-    return gulp.src([
-            'node_modules/bootstrap/dist/css/bootstrap.css',
-            sources.styles
-        ])
+    return gulp.src(sources.styles)
         .pipe(less())
         .pipe(concat('bundle.css'))
         .pipe(gulp.dest(build));
 });
 
-function getTemplates() {
-    return gulp.src([sources.html, '!src/index.html'])
-        .pipe(template({module: 'blog'}));
-}
-
 /**
  * Task scripts: compile and concat all js files
  */
 gulp.task('scripts', function () {
-    return gulp.src([
-            'node_modules/jquery/dist/jquery.js',
-            'node_modules/angular/angular.js',
-            'node_modules/angular-route/angular-route.js',
-            'src/app.js',
-            sources.scripts
-        ])
+    function getTemplates() {
+        return gulp.src(sources.templates)
+            .pipe(template({module: 'blog'}));
+    }
+
+    return gulp.src(sources.scripts)
         .pipe(addStream.obj(getTemplates()))
         .pipe(concat('bundle.js'))
         .pipe(gulp.dest(build));
 });
 
-gulp.task('test', ['scripts'], function (done) {
+gulp.task('specs', ['scripts'], function (done) {
     new karma({
-        configFile: __dirname + '/test/karma.conf.js',
+        configFile: __dirname + '/test/specs/karma.conf.js',
         singleRun: true
     }, done).start();
 });
 
-/**
- * Task scripts: compile and concat all js files
- */
-gulp.task('copy-index', function () {
+gulp.task('assets', function () {
     return gulp.src('src/index.html')
         .pipe(gulp.dest(build));
 });
 
 gulp.task('serve', ['build'], function () {
     gulp.watch(sources.styles, ['styles']);
-    gulp.watch(['src/app.js', sources.html, sources.scripts], ['scripts']);
+    gulp.watch(['src/app.js', sources.templates, sources.scripts], ['scripts']);
 
-    server.listen({path: 'server.js'});
+    server.listen({path: 'test/server.js'});
 });
 
-/*
- gulp.watch ['bower.json', sources.styles], ['styles']
- gulp.watch ['bower.json', sources.scripts], ['scripts']
- gulp.watch(sources.need_reload).on 'change', server.restart*/
-
-// Default task
-gulp.task('build', ['copy-index', 'styles', 'scripts']);
-gulp.task('default', ['build']);
+gulp.task('build', ['assets', 'styles', 'scripts']);

@@ -1,6 +1,6 @@
 module.exports = function (config) {
     config.set({
-        basePath: '../',
+        basePath: '../../',
         browsers: [
             'PhantomJS'
             // , 'Chrome'
@@ -15,7 +15,7 @@ module.exports = function (config) {
             'build/bundle.js',
             'node_modules/angular-mocks/angular-mocks.js',
             'node_modules/moment/moment.js',
-            'test/**/*.spec.js'
+            'test/specs/**/*.spec.js'
         ]
     });
 };
