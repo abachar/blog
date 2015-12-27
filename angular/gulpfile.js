@@ -5,6 +5,8 @@ var template = require('gulp-angular-templatecache');
 var addStream = require('add-stream');
 var server = require('gulp-develop-server');
 var karma = require('karma').Server;
+var webdriver = require('gulp-webdriver');
+var selenium = require('selenium-standalone');
 
 /**
  * Define paths
@@ -54,11 +56,37 @@ gulp.task('scripts', function () {
         .pipe(gulp.dest(build));
 });
 
-gulp.task('specs', ['scripts'], function (done) {
+gulp.task('test:specs', ['scripts'], function (done) {
     new karma({
         configFile: __dirname + '/test/specs/karma.conf.js',
         singleRun: true
     }, done).start();
+});
+
+var seleniumServer;
+gulp.task('selenium', function (done) {
+    selenium.install({logger: console.log}, () => {
+        selenium.start((err, child) => {
+            if (err) {
+                return done(err);
+            }
+            seleniumServer = child;
+            done();
+        });
+    });
+});
+
+gulp.task('server', function (done) {
+    server.listen({path: 'test/server.js'}, done);
+});
+
+gulp.task('test:e2e', ['server', 'selenium'], function () {
+    return gulp.src(__dirname + '/test/e2e/wdio.conf.js')
+        .pipe(webdriver())
+        .once('end', function () {
+            server.kill();
+            seleniumServer.kill();
+        });
 });
 
 gulp.task('assets', function () {
