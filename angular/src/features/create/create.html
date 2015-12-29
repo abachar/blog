@@ -1,4 +1,4 @@
-<div id="posts" ng-controller="CreateController as createCtrl">
+<div ng-controller="CreateController as createCtrl">
     <h2>Create a new post</h2>
 
     <p>All fields are required</p>
@@ -6,15 +6,19 @@
         An error occurred when saving the comment
     </p>
 
-    <form>
-        <div class="form-group">
+    <form name="createForm" novalidate>
+        <div class="form-group" ng-class="{'has-error' : createForm.title.$invalid && !createForm.title.$pristine}">
             <label class="control-label">Title *</label>
-            <input type="text" class="form-control" ng-model="createCtrl.formPost.title" required />
+            <input type="text" class="form-control" name="title" ng-model="createCtrl.formPost.title" required />
+            <p ng-show="createForm.title.$invalid && !createForm.title.$pristine"
+               class="help-block">The title is required.</p>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error' : createForm.author.$invalid && !createForm.author.$pristine}">
             <label class="control-label">Your name *</label>
-            <input type="text" class="form-control" ng-model="createCtrl.formPost.author" required />
+            <input type="text" class="form-control" name="author" ng-model="createCtrl.formPost.author" required />
+            <p ng-show="createForm.author.$invalid && !createForm.author.$pristine"
+               class="help-block">Your name is required.</p>
         </div>
 
         <div class="form-group">
@@ -22,14 +26,18 @@
             <input type="text" class="form-control" ng-model="createCtrl.formPost.tags" />
         </div>
 
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error' : createForm.content.$invalid && !createForm.content.$pristine}">
             <label class="control-label">Content *</label>
-            <textarea class="form-control" rows="4" ng-model="createCtrl.formPost.content" required />
+            <textarea class="form-control" name="content" rows="4" ng-model="createCtrl.formPost.content" required />
+            <p ng-show="createForm.content.$invalid && !createForm.content.$pristine"
+               class="help-block">The content is required.</p>
         </div>
 
         <div class="form-group">
             <div class="controls">
-                <button class="btn btn-primary" type="submit" ng-click="createCtrl.create()">Create</button>
+                <button class="btn btn-primary btn-create" type="submit"
+                        ng-disabled="createForm.$invalid"
+                        ng-click="createCtrl.create()">Create</button>
             </div>
         </div>
     </form>
