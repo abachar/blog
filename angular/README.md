@@ -25,3 +25,9 @@ To run tests
 
     gulp test:specs
     gulp test:e2e
+
+To run CSS regression tests
+
+    cd ./node_modules/backstopjs/
+    gulp test
+    
