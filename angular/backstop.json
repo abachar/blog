@@ -1,0 +1,56 @@
+{
+  "viewports": [
+    {
+      "name": "desktop",
+      "width": 1024,
+      "height": 768
+    }
+  ],
+  "scenarios": [
+    {
+      "label": "Home page",
+      "url": "http://localhost:3000/#/",
+      "hideSelectors": [],
+      "removeSelectors": [],
+      "selectors": [
+        "header",
+        "article:first-of-type"
+      ],
+      "readyEvent": "backstop.ready",
+      "delay": 0
+    },
+    {
+      "label": "New post page",
+      "url": "http://localhost:3000/#/create",
+      "hideSelectors": [],
+      "removeSelectors": [],
+      "selectors": [
+        "div[ng-view]"
+      ],
+      "readyEvent": "backstop.ready",
+      "delay": 0
+    },
+    {
+      "label": "New post page",
+      "url": "http://localhost:3000/#/show/veniam-non-reprehenderit",
+      "hideSelectors": [],
+      "removeSelectors": [],
+      "selectors": [
+        "h5",
+        ".tags",
+        "article.comment"
+      ],
+      "readyEvent": "backstop.ready",
+      "delay": 10,
+      "misMatchThreshold" : 0.1
+    }
+  ],
+  "paths": {
+    "bitmaps_reference": "../../test/perceptual/reference",
+    "bitmaps_test": "../../test/perceptual/test",
+    "compare_data": "../../test/perceptual/test/compare.json",
+    "casper_scripts": "../../test/perceptual/scripts"
+  },
+  "engine": "phantomjs",
+  "report": ["CLI", "browser"]
+}

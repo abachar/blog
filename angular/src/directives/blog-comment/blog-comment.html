@@ -1,7 +1,7 @@
 <article class="comment">
-    <h5>
+    <h6>
         Posted on <time class="label label-info">{{::createdAt}}</time>
         by <strong>{{::comment.author}}</strong>
-    </h5>
+    </h6>
     <p ng-bind-html="comment.content | nl2br"></p>
 </article>
