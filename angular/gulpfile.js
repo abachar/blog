@@ -65,8 +65,8 @@ gulp.task('test:specs', ['scripts'], function (done) {
 
 var seleniumServer;
 gulp.task('selenium', function (done) {
-    selenium.install({logger: console.log}, () => {
-        selenium.start((err, child) => {
+    selenium.install({logger: console.log}, function () {
+        selenium.start(function (err, child) {
             if (err) {
                 return done(err);
             }
