@@ -28,6 +28,8 @@ To run tests
 
 To run CSS regression tests
 
+    gulp serve &
+    
     cd ./node_modules/backstopjs/
     gulp test
     

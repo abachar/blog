@@ -17,6 +17,7 @@
     "gulp-karma": "0.0.5",
     "gulp-less": "^3.0.5",
     "gulp-webdriver": "^1.0.2",
+    "jasmine": "^2.4.1",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.16",
     "karma-jasmine": "^0.3.6",

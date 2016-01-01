@@ -63,14 +63,13 @@ gulp.task('test:specs', ['scripts'], function (done) {
     }, done).start();
 });
 
-var seleniumServer;
 gulp.task('selenium', function (done) {
     selenium.install({logger: console.log}, function () {
         selenium.start(function (err, child) {
             if (err) {
                 return done(err);
             }
-            seleniumServer = child;
+            selenium.child = child;
             done();
         });
     });
@@ -85,7 +84,7 @@ gulp.task('test:e2e', ['server', 'selenium'], function () {
         .pipe(webdriver())
         .once('end', function () {
             server.kill();
-            seleniumServer.kill();
+            selenium.child.kill();
         });
 });
 
