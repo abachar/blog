@@ -11,7 +11,7 @@ export class App extends React.Component {
                     </div>
                     <nav className="collapse navbar-collapse">
                         <ul className="nav navbar-nav navbar-right">
-                            <li><IndexLink to="/" className="create" activeClassName="active">All posts</IndexLink></li>
+                            <li><IndexLink to="/" className="create" activeClassName="active">All article</IndexLink></li>
                             <li><Link to="/create" className="go-home" activeClassName="active">Create new</Link></li>
                         </ul>
                     </nav>

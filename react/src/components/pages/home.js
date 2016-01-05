@@ -1,9 +1,38 @@
 import React from 'react'
+// import { findDOMNode } from 'react-dom'
+
+import ArticleSummary from '../article-summary.js'
 
 export class HomePage extends React.Component {
+    //constructor(props) {
+    //    super(props);
+        // Replace this by ::this._onChangeFilter in onChange
+        // this._onChangeFilter = this._onChangeFilter.bind(this);
+    //}
+
+    //_onChangeFilter() {
+        //const { dispatch } = this.props;
+        //const email = findDOMNode(this.refs.email).value;
+        //const password = findDOMNode(this.refs.password).value;
+        //dispatch(manualLogin({
+        //    email: email,
+        //    password: password
+        //}));
+    //}
+
     render() {
+        const articles = this.props.articles ?
+            this.props.articles.map((article) => <ArticleSummary article={article}/>)
+            : null;
+
         return (
-            <h2>Blog</h2>
+            <div>
+                <h2>Blog</h2>
+                <div className="form-group">
+                    <input type="text" className="form-control" placeholder="Filter by tags" onChange={this._onChangeFilter} />
+                </div>
+                <section className="articles">{articles}</section>
+            </div>
         )
     }
 }
