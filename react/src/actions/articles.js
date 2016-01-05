@@ -1,5 +1,5 @@
-import 'es6-promise';
-import fetch from 'isomorphic-fetch';
+// import 'es6-promise';
+// import fetch from 'isomorphic-fetch';
 
 // https://github.com/choonkending/react-webpack-node/blob/master/app/actions/users.js
 // http://reactkungfu.com/2015/07/react-with-flux-by-example-simple-todo-list-dissected/

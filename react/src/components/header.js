@@ -1,23 +1,23 @@
 import React from 'react'
 import { IndexLink, Link } from 'react-router'
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
-export class App extends React.Component {
+export default class Header extends React.Component {
     render() {
         return (
-            <header className="navbar navbar-inverse navbar-fixed-top">
-                <div className="container">
-                    <div className="navbar-header">
-                        <Link to="/" className="navbar-brand">Blog[React]</Link>
-                    </div>
-                    <nav className="collapse navbar-collapse">
-                        <ul className="nav navbar-nav navbar-right">
-                            <li><IndexLink to="/" className="create" activeClassName="active">All article</IndexLink></li>
-                            <li><Link to="/create" className="go-home" activeClassName="active">Create new</Link></li>
-                        </ul>
-                    </nav>
-                </div>
-            </header>
+            <Navbar inverse fixedTop>
+                <Navbar.Header>
+                    <Navbar.Brand>
+                        <Link to="/">Blog[React]</Link>
+                    </Navbar.Brand>
+                </Navbar.Header>
+                <Navbar.Collapse>
+                    <Nav pullRight>
+                        <NavItem href="#/">All article</NavItem>
+                        <NavItem href="#/create">Create new</NavItem>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
         )
     }
 }
-

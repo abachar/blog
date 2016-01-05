@@ -1,6 +1,6 @@
 import React from 'react'
 
-export class ArticleSummary extends React.Component {
+export default class ArticleSummary extends React.Component {
     render() {
         return (
             <article>

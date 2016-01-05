@@ -1,14 +1,14 @@
 import React from 'react'
 // import { Input, Button } from 'react-bootstrap';
 
-export class CreatePage extends React.Component {
-    submit(ev) {
-        ev.preventDefault();
+export default class CreatePage extends React.Component {
+    // submit(ev) {
+        //ev.preventDefault();
         //if(!this.state.submittable) { return; }
 
         //TodoListActions.addTask(this.state.content);
         //AddNewTaskFormActions.clearForm();
-    }
+    // }
 
     render() {
         return (
@@ -16,10 +16,10 @@ export class CreatePage extends React.Component {
                 <h2>Create a new article</h2>
 
                 <p>All fields are required</p>
-                <!-- p class="alert alert-danger" ng-if="false">
+                {/* <p class="alert alert-danger" ng-if="false">
                     An error occurred when saving the comment
-                </p -->
-                <form onSubmit={this.submit}>
+                </p> */}
+                {/* <form onSubmit={this.submit}>
                     <Input type="text"
                            value={this.state.title}
                            label="Enter content:"
@@ -30,7 +30,7 @@ export class CreatePage extends React.Component {
 
                     <Button type="submit" bsStyle="primary"
                             disabled={!this.state.submittable}>Create</Button>
-                </form>
+                </form> */}
             </div>
         )
     }
