@@ -2,7 +2,7 @@ import React from 'react'
 import { Input } from 'react-bootstrap';
 // import { findDOMNode } from 'react-dom'
 
-import ArticleSummary from '../article-summary.js'
+import ArticleSummary from 'components/article-summary.js'
 
 export default class HomePage extends React.Component {
     //constructor(props) {
@@ -23,8 +23,7 @@ export default class HomePage extends React.Component {
 
     render() {
         const articles = this.props.articles ?
-            this.props.articles.map((article) => <ArticleSummary article={article}/>)
-            : null;
+            this.props.articles.map((article) => <ArticleSummary article={article}/>) : null;
 
         return (
             <div>

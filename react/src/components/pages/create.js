@@ -1,14 +1,46 @@
 import React from 'react'
-// import { Input, Button } from 'react-bootstrap';
+import { Input, Button } from 'react-bootstrap';
+import CreateArticleStore  from 'stores/create-article'
+import CreateArticleActions  from 'actions/create-article'
 
 export default class CreatePage extends React.Component {
-    // submit(ev) {
-        //ev.preventDefault();
-        //if(!this.state.submittable) { return; }
+    constructor(props) {
+        super(props);
+
+        // let { shouldComponentUpdate } = React.addons.PureRenderMixin;
+
+        this.state = CreateArticleStore.getState();
+
+        // this.shouldComponentUpdate = shouldComponentUpdate.bind(this);
+        this.formChanged = this.formChanged.bind(this);
+        this.submit = this.submit.bind(this);
+    }
+
+    componentDidMount() {
+        CreateArticleStore.listen(this.formChanged);
+    }
+
+    componentWillUnmount() {
+        CreateArticleStore.unlisten(this.formChanged);
+    }
+
+    formChanged(formState) {
+        this.setState(formState);
+    }
+
+    changeContent(ev) {
+        CreateArticleActions.changeContent(ev.target.value);
+    }
+
+    submit(ev) {
+        ev.preventDefault();
+        if (!this.state.submittable) {
+            return;
+        }
 
         //TodoListActions.addTask(this.state.content);
-        //AddNewTaskFormActions.clearForm();
-    // }
+        CreateArticleActions.clear();
+    }
 
     render() {
         return (
@@ -19,18 +51,18 @@ export default class CreatePage extends React.Component {
                 {/* <p class="alert alert-danger" ng-if="false">
                     An error occurred when saving the comment
                 </p> */}
-                {/* <form onSubmit={this.submit}>
-                    <Input type="text"
+                <form onSubmit={this.submit}>
+                    <Input key="articleTitle"
+                           type="text"
                            value={this.state.title}
-                           label="Enter content:"
-                           bsStyle={this.validationClass()}
+                           label="Title *"
                            help={this.state.validationError}
                            hasFeedback
                            onChange={this.changeContent} />
 
-                    <Button type="submit" bsStyle="primary"
+                    <Button key="createButton" type="submit" bsStyle="primary"
                             disabled={!this.state.submittable}>Create</Button>
-                </form> */}
+                </form>
             </div>
         )
     }

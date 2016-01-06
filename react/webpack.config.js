@@ -12,6 +12,17 @@ module.exports = {
         filename: 'bundle.js',
         publicPath: '/build/'
     },
+    resolve: {
+        extensions: ['', '.js'],
+        alias: {
+            // 'styles': __dirname + '/src/styles',
+            // 'mixins': __dirname + '/src/mixins',
+            'components': __dirname + '/src/components/',
+            'stores': __dirname + '/src/stores',
+            'actions': __dirname + '/src/actions'
+            // 'lib': __dirname + '/src/lib'
+        }
+    },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin()
