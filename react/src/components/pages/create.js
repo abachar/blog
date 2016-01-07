@@ -38,7 +38,7 @@ export default class CreatePage extends React.Component {
             return;
         }
 
-        //TodoListActions.addTask(this.state.content);
+        // ArticleListActions.create(this.state.content);
         CreateArticleActions.clear();
     }
 
