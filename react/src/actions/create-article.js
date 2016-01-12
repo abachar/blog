@@ -1,4 +1,5 @@
 import alt from '../alt';
+import fetch from 'isomorphic-fetch';
 // import Immutable   from 'immutable';
 
 // import 'es6-promise';

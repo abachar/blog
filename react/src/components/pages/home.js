@@ -21,6 +21,10 @@ export default class HomePage extends React.Component {
         //}));
     }
 
+    componentWillMount () {
+        ArticleActions.getDealers();
+    }
+
     render() {
         const articles = this.props.articles ?
             this.props.articles.map((article) => <ArticleSummary article={article}/>) : null;
@@ -30,7 +34,7 @@ export default class HomePage extends React.Component {
                 <h2>Blog</h2>
                 <Input type="text" ref="filter" placeholder="Filter by tags" onChange={this._onChangeFilter}/>
 
-                {<section className="articles">{articles}</section>}
+                <section className="articles">{articles}</section>
             </div>
         )
     }

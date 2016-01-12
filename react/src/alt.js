@@ -1,3 +1,7 @@
 import Alt from 'alt'
 
-export default new Alt();
+var alt = new Alt();
+alt.dispatcher.register(console.log);
+
+export default alt;
+// export default new Alt();
