@@ -1,5 +1,5 @@
 .DS_Store
 .idea/
-node_modules/
-*/node_modules/
-build/
+**/node_modules/
+**/jspm_packages/
+**/build/
