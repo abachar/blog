@@ -1,1 +1,3 @@
-home.js
+export class Home {
+
+}
