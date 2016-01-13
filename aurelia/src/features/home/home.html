@@ -1,3 +1,22 @@
 <template>
-    <h1>Home</h1>
+    <div class="posts">
+        <h2>Blog</h2>
+
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Filter by tags" value.bind="filter" />
+        </div>
+
+        <section class="posts">
+            <article repeat.for="post of posts">
+                <h3><a ng-href="#/show/{{::post.code}}">${post.title}</a></h3>
+                <h5>
+                    Posted on <time class="label label-primary">post.createdAt | date:'dd MMMM yyyy'</time>
+                    by <strong>{{::post.author}</strong>,
+                    ${post.comments.length}} comments
+                </h5>
+
+                <p>{{post.content | limitTo:100}}...</p>
+            </article>
+        </section>
+    </div>
 </template>
