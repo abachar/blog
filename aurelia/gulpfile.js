@@ -29,16 +29,11 @@ gulp.task('clean', function () {
 // lint
 
 gulp.task('build-system', function () {
-    var babelOptions = {
-        presets: ['es2015', 'stage-1'],
-        plugins: ['transform-es2015-modules-systemjs']
-    };
-
     return gulp.src(paths.source)
         .pipe(plumber({errorHandler: notify.onError('Error: <%= error.message %>')}))
         .pipe(changed(paths.output, {extension: '.js'}))
         .pipe(sourcemaps.init({loadMaps: true}))
-        .pipe(babel(babelOptions))
+        .pipe(babel())
         .pipe(sourcemaps.write({includeContent: true}))
         .pipe(gulp.dest(paths.output));
 });
@@ -80,16 +75,14 @@ gulp.task('tdd', function (done) {
 });
 
 gulp.task('serve', ['build'], function (done) {
+    var router = require('./test/server');
     browserSync({
         online: false,
         open: false,
         port: 9000,
         server: {
             baseDir: ['.'],
-            middleware: function (req, res, next) {
-                res.setHeader('Access-Control-Allow-Origin', '*');
-                next();
-            }
+            middleware: [router]
         }
     }, done);
 });

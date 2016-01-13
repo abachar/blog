@@ -1,5 +1,5 @@
-import {inject} from 'aurelia-framework';
-import {PostService} from '../../services/post';
+import {inject} from 'aurelia-framework'
+import {PostService} from '../../services/post'
 
 @inject(PostService)
 export class Home {

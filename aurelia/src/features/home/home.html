@@ -1,4 +1,7 @@
 <template>
+    <require from="../../converters/date-format"></require>
+    <require from="../../converters/shorten"></require>
+
     <div class="posts">
         <h2>Blog</h2>
 
@@ -8,14 +11,14 @@
 
         <section class="posts">
             <article repeat.for="post of posts">
-                <h3><a ng-href="#/show/{{::post.code}}">${post.title}</a></h3>
+                <h3><a href="#/show/${post.code}">${post.title}</a></h3>
                 <h5>
-                    Posted on <time class="label label-primary">post.createdAt | date:'dd MMMM yyyy'</time>
-                    by <strong>{{::post.author}</strong>,
-                    ${post.comments.length}} comments
+                    Posted on <time class="label label-primary">${post.createdAt | dateFormat}</time>
+                    by <strong>${post.author}</strong>,
+                    ${post.comments.length} comments
                 </h5>
 
-                <p>{{post.content | limitTo:100}}...</p>
+                <p>${post.content | shorten}...</p>
             </article>
         </section>
     </div>
