@@ -16,7 +16,7 @@ export class PostService {
             .then(response => response.json())
     }
 
-    findByCode() {
+    findByCode(code) {
         return this.http.fetch('/' + code)
             .then(response => response.json())
     }

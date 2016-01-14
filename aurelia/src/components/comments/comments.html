@@ -1,0 +1,8 @@
+<template>
+    <require from="../comment/comment"></require>
+
+    <h2>Comments (${items.length})</h2>
+    <article class="comment" repeat.for="item of items">
+        <comment data.bind="item"></comment>
+    </article>
+</template>

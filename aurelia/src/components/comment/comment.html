@@ -1,1 +1,10 @@
-comment.html
+<template>
+    <require from="../../converters/date-format"></require>
+    <require from="../../converters/nl2br"></require>
+
+    <h6>
+        Posted on <time class="label label-info">${data.createdAt | dateFormat}</time>
+        by <strong>${data.author}</strong>
+    </h6>
+    <p innerHTML.bind="data.content | nl2br"></p>
+</template>
