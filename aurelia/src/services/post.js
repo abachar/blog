@@ -1,11 +1,18 @@
 import {inject} from 'aurelia-framework';
-import {HttpClient} from 'aurelia-fetch-client';
+import {HttpClient, json} from 'aurelia-fetch-client';
 
 @inject(HttpClient)
 export class PostService {
     constructor(http) {
         http.configure(config => {
-            config.withBaseUrl('/posts');
+            config
+                .withBaseUrl('/posts')
+                .withDefaults({
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'Fetch'
+                    }
+                })
         });
 
         this.http = http;
@@ -22,26 +29,13 @@ export class PostService {
     }
 
     create(post) {
-        return this.http.post('/', {
-            title: post.title,
-            author: post.author,
-            content: post.content,
-            tags: post.tags
-        }).then(response => response.json().code)
+        return this.http
+            .fetch('', {method: 'post', body: JSON.stringify(post)})
+            .then(response => response.json().code)
     }
 
     addComment(code, comment) {
         return this.http
-            .post('/posts/' + code + '/comments', {
-                author: comment.author,
-                content: comment.content
-            })
+            .fetch('/' + code + '/comments', {method: 'post', body: JSON.stringify(comment)})
     }
 }
-
-
-
-
-//"bootstrap": "github:twbs/bootstrap@^3.3.5",
-//"font-awesome": "npm:font-awesome@^4.5.0",
-//"text": "github:systemjs/plugin-text@^0.0.3"

@@ -1,29 +1,40 @@
 import {inject} from 'aurelia-framework'
+import {Validation} from 'aurelia-validation'
 import {PostService} from '../../services/post'
 
-@inject(PostService)
+@inject(PostService, Validation)
 export class Show {
-    constructor(postService) {
-        this.postService = postService;
+    constructor(postService, validation) {
         this.resetComment();
+
+        this.postService = postService;
+        this.validation = validation.on(this.comment)
+            .ensure('author')
+              .isNotEmpty()
+              .hasLengthBetween(3, 50)
+            .ensure('content')
+              .isNotEmpty()
+              .hasLengthBetween(3, 200);
     }
 
     activate(params) {
+        this.code = params.code;
         this.postService
             .findByCode(params.code)
             .then(post => this.post = post);
     }
 
     resetComment() {
+        this.hasErrors = false;
         this.comment = {
             author: '',
             content: ''
         };
     }
 
-    sendComment() {
-        this.postService
-            .addComment(code, self.formComment)
+    addComment() {
+        this.validation.validate()
+            .then(() => this.postService.addComment(this.code, this.comment))
             .then(() => {
                 this.post.comments.push({
                     createdAt: new Date(),
@@ -31,6 +42,7 @@ export class Show {
                     content: this.comment.content
                 });
                 this.resetComment();
-            });
+            })
+            .catch(() => this.hasErrors = true);
     }
 }

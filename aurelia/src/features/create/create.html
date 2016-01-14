@@ -1,0 +1,37 @@
+<template>
+    <h2>Create a new post</h2>
+
+    <p>All fields are required</p>
+    <p class="alert alert-danger" if.bind="hasError">
+        An error occurred when saving the comment
+    </p>
+
+    <form submit.delegate="create()">
+        <div class="form-group">
+            <label class="control-label">Title *</label>
+            <input type="text" class="form-control" value.bind="post.title" />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Your name *</label>
+            <input type="text" class="form-control" value.bind="post.author" />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Tags</label>
+            <input type="text" class="form-control" value.bind="post.tags" />
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Content *</label>
+            <textarea class="form-control" rows="4" value.bind="post.content"></textarea>
+        </div>
+
+        <div class="form-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-primary"
+                        disabled.bind="!validation.result.isValid">Create</button>
+            </div>
+        </div>
+    </form>
+</template>

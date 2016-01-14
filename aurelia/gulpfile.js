@@ -9,6 +9,8 @@ var sourcemaps = require('gulp-sourcemaps');
 var babel = require('gulp-babel');
 var notify = require("gulp-notify");
 var karma = require('karma').Server;
+var server = require('gulp-develop-server');
+var proxy = require('http-proxy-middleware');
 
 var paths = {
     root: 'src/',
@@ -74,15 +76,21 @@ gulp.task('tdd', function (done) {
     }, done).start();
 });
 
-gulp.task('serve', ['build'], function (done) {
-    var router = require('./test/server');
+gulp.task('backend-server', function (done) {
+    server.listen({path: 'test/server.js'}, done);
+});
+
+gulp.task('serve', ['backend-server', 'build'], function (done) {
     browserSync({
         online: false,
         open: false,
-        port: 9000,
+        port: 3000,
         server: {
-            baseDir: ['.'],
-            middleware: [router]
+            baseDir: '.',
+            middleware: [proxy('/posts', {
+                target: 'http://localhost:8080',
+                changeOrigin: true
+            })]
         }
     }, done);
 });
